@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Love Arcade 💕</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <h1>Love Arcade 💕</h1>
@@ -13,33 +15,35 @@
 
   <div class="container">
 
+    <!-- Master Inputs -->
+    <div class="input-section">
+      <input type="text" id="name1" placeholder="Your Name">
+      <span class="heart-icon">❤️</span>
+      <input type="text" id="name2" placeholder="Crush Name">
+      <button onclick="revealDestiny()">Reveal Destiny �</button>
+    </div>
+
     <!-- FLAMES -->
     <div class="card">
       <h2>💘 FLAMES</h2>
-      <input type="text" id="flameName1" placeholder="Your Name">
-      <input type="text" id="flameName2" placeholder="Crush Name">
-      <button onclick="calculateFlames()">Check Fate 💌</button>
-      <p id="flameResult"></p>
+      <p id="flameResult">Waiting for destiny... ⏳</p>
     </div>
 
     <!-- Love Calculator -->
     <div class="card">
       <h2>❤️ Love Calculator</h2>
-      <input type="text" id="loveName1" placeholder="Name 1">
-      <input type="text" id="loveName2" placeholder="Name 2">
-      <button onclick="calculateLove()">Calculate 💖</button>
-      <p id="loveResult"></p>
+      <p id="loveResult">... 💓</p>
     </div>
 
     <!-- Prediction -->
     <div class="card">
       <h2>🎲 Love Prediction</h2>
-      <button onclick="predictLove()">Should I confess? 💕</button>
-      <p id="predictResult"></p>
+      <p id="predictResult">... 🎱</p>
     </div>
 
   </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>
