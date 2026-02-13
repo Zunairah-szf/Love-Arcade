@@ -1,18 +1,16 @@
 const FLAMES_RESULTS = ["Friends 🤝", "Lovers 💕", "Affection 🥰", "Marriage 💍", "Enemies 😤", "Soulmates ✨"];
 
 function getFlamesIndex(name1, name2) {
-  name1 = name1.toLowerCase().replace(/\s/g, "");
-  name2 = name2.toLowerCase().replace(/\s/g, "");
+  let n1 = name1.toLowerCase().replace(/\s/g, "");
+  let n2 = name2.toLowerCase().replace(/\s/g, "");
+  let combined = n1 + n2;
 
-  let combined = name1 + name2;
-
-  for (let char of name1) {
-    if (name2.includes(char)) {
+  for (let char of n1) {
+    if (n2.includes(char)) {
       combined = combined.replace(char, "");
-      name2 = name2.replace(char, "");
+      n2 = n2.replace(char, "");
     }
   }
-
   return combined.length % FLAMES_RESULTS.length;
 }
 
@@ -25,100 +23,38 @@ function revealDestiny() {
     return;
   }
 
-  // Trigger Animations
-  const results = document.querySelectorAll(".card p");
-  results.forEach(result => {
-    result.classList.remove("pop-in");
-    void result.offsetWidth; // Trigger reflow
-    result.classList.add("pop-in");
-  });
+  const flamesIndex = getFlamesIndex(name1, name2);
+  
+  // Update FLAMES
+  const flamesText = FLAMES_RESULTS[flamesIndex];
+  document.getElementById("flameResult").innerText = flamesText;
 
-  const flamesRes = calculateFlames(name1, name2);
-  const loveRes = calculateLove(name1, name2);
-  const predictRes = predictLove(name1, name2);
-
-  // Results are calculated locally. No data is sent to any server.
-}
-
-function calculateFlames(name1, name2) {
-  let index = getFlamesIndex(name1, name2);
-  let result = FLAMES_RESULTS[index];
-  document.getElementById("flameResult").innerText = result;
-  return result;
-}
-
-
-function calculateLove(name1, name2) {
-  let flamesIndex = getFlamesIndex(name1, name2);
-  let score = 0;
-  let message = "";
-
-  // Base score ranges based on FLAMES result
-  // Friends: 40-59, Lovers: 80-94, Affection: 60-79, Marriage: 95-99, Enemies: 0-29, Soulmates: 100
-
-  // Add some variance based on names so it's not always the exact same number for the category
+  // Update Love Calculator
   let variance = (name1.length + name2.length) % 15;
+  let score = 0;
+  let loveMsg = "";
 
-  switch (flamesIndex) {
-    case 0: // Friends
-      score = 40 + variance;
-      message = "Good friends! 👫";
-      break;
-    case 1: // Lovers
-      score = 80 + variance;
-      message = "Deeply in love! 💘";
-      break;
-    case 2: // Affection
-      score = 60 + variance;
-      message = "Sweet affection! 🍭";
-      break;
-    case 3: // Marriage
-      score = 95 + (variance % 5);
-      message = "Put a ring on it! 💍";
-      break;
-    case 4: // Enemies
-      score = 0 + variance * 2; // 0-28 range roughly
-      message = "Total war! ⚔️";
-      break;
-    case 5: // Soulmates
-      score = 100;
-      message = "Perfect match! 🌟";
-      break;
-  }
+  const scores = [
+    { s: 40 + variance, m: "Good friends! 👫" },    // Friends
+    { s: 80 + variance, m: "Deeply in love! 💘" },   // Lovers
+    { s: 60 + variance, m: "Sweet affection! 🍭" }, // Affection
+    { s: 95 + (variance % 5), m: "Put a ring on it! 💍" }, // Marriage
+    { s: 0 + variance * 2, m: "Total war! ⚔️" },    // Enemies
+    { s: 100, m: "Perfect match! 🌟" }               // Soulmates
+  ];
 
-  if (score > 100) score = 100;
+  score = scores[flamesIndex].s > 100 ? 100 : scores[flamesIndex].s;
+  loveMsg = scores[flamesIndex].m;
+  document.getElementById("loveResult").innerText = `${score}% - ${loveMsg}`;
 
-  document.getElementById("loveResult").innerText = score + "% - " + message;
-  return score;
+  // Update Prediction
+  const predictions = [
+    "Not yet! Build the friendship first 💛",
+    "YES! Go for it! They are waiting! 💌",
+    "Maybe drop a subtle hint first 😉",
+    "It is your destiny! Confess now! 💍",
+    "Better keep it a secret for now... 😬",
+    "Absolutely! The stars verify it! ✨"
+  ];
+  document.getElementById("predictResult").innerText = predictions[flamesIndex];
 }
-
-
-function predictLove(name1, name2) {
-  let flamesIndex = getFlamesIndex(name1, name2);
-  let prediction = "";
-
-  switch (flamesIndex) {
-    case 0: // Friends
-      prediction = "Not yet! Build the friendship first 💛";
-      break;
-    case 1: // Lovers
-      prediction = "YES! Go for it! They are waiting! 💌";
-      break;
-    case 2: // Affection
-      prediction = "Maybe drop a subtle hint first 😉";
-      break;
-    case 3: // Marriage
-      prediction = "It is your destiny! Confess now! 💍";
-      break;
-    case 4: // Enemies
-      prediction = "Better keep it a secret for now... 😬";
-      break;
-    case 5: // Soulmates
-      prediction = "Absolutely! The stars verify it! ✨";
-      break;
-  }
-
-  document.getElementById("predictResult").innerText = prediction;
-  return prediction;
-}
-
