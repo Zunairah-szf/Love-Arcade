@@ -50,9 +50,9 @@ async function revealDestiny() {
         prediction: predictRes
       })
     });
-    if (response.ok) console.log("Match saved! 💾");
+    if (response.ok) console.log("Matched");
   } catch (err) {
-    console.error("Error saving match:", err);
+    console.error("Error", err);
   }
 }
 
@@ -137,3 +137,4 @@ function predictLove(name1, name2) {
   document.getElementById("predictResult").innerText = prediction;
   return prediction;
 }
+
