@@ -16,7 +16,7 @@ function getFlamesIndex(name1, name2) {
   return combined.length % FLAMES_RESULTS.length;
 }
 
-async function revealDestiny() {
+function revealDestiny() {
   let name1 = document.getElementById("name1").value;
   let name2 = document.getElementById("name2").value;
 
@@ -37,23 +37,7 @@ async function revealDestiny() {
   const loveRes = calculateLove(name1, name2);
   const predictRes = predictLove(name1, name2);
 
-  // Save to MongoDB
-  try {
-    const response = await fetch('/api/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name1: name1,
-        name2: name2,
-        flamesResult: flamesRes,
-        loveScore: loveRes,
-        prediction: predictRes
-      })
-    });
-    if (response.ok) console.log("Match saved! 💾");
-  } catch (err) {
-    console.error("Error saving match:", err);
-  }
+  console.log("Results calculated!");
 }
 
 function calculateFlames(name1, name2) {
