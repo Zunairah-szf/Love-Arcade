@@ -121,3 +121,4 @@ function predictLove(name1, name2) {
   document.getElementById("predictResult").innerText = prediction;
   return prediction;
 }
+
