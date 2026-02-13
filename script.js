@@ -37,7 +37,7 @@ function revealDestiny() {
   const loveRes = calculateLove(name1, name2);
   const predictRes = predictLove(name1, name2);
 
-  console.log("Results calculated!");
+  // Results are calculated locally. No data is sent to any server.
 }
 
 function calculateFlames(name1, name2) {
