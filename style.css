@@ -5,20 +5,9 @@ body {
   padding: 20px;
 }
 
-h1 {
-  color: #ff4d88;
-}
-
-.subtitle {
-  margin-bottom: 30px;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
+h1 { color: #ff4d88; }
+.subtitle { margin-bottom: 30px; }
+.container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 
 .card {
   background: white;
@@ -28,7 +17,6 @@ h1 {
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* New Input Section Styles */
 .input-section {
   width: 100%;
   margin-bottom: 30px;
@@ -56,12 +44,6 @@ h1 {
   color: white;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.input-section button:hover {
-  transform: scale(1.05);
-  background: #ff1a66;
 }
 
 .heart-icon {
@@ -70,20 +52,8 @@ h1 {
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
-p {
-  margin-top: 10px;
-  font-weight: bold;
-}
+p { margin-top: 10px; font-weight: bold; }
